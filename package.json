@@ -1,0 +1,12 @@
+{
+    "name": "phate",
+    "version": "0.0.1",
+    "description": "A state management library for Javascript",
+    "author": "dirjk - github.com/dirjk",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dirjk/phate.git"
+    },
+    "homepage": "https://github.com/dirjk/phate",
+    "license": "MIT"
+}
