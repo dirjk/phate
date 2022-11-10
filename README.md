@@ -32,7 +32,7 @@ Return Value: the updated value of this state.
 
 Phate has the option to keep track of the entire history of state updates throughout your app's lifecycle. This is useful to help debug any race conditions that may occur with asynchrounous state updates, or just to see how your state has changed over time.
 
-State Histories are available through the `getPhateHistory()` function. For memory considerations, this is only available when `debugMode` is set to `true` what a phate is initialized.
+State Histories are available through the `getPhateHistory()` function. For memory considerations, this is only available when `debugMode` is set to `true` when a phate is initialized.
 
 Parameters:
 * `key` - the unique key that identifies which state you would like the history of.
@@ -50,7 +50,7 @@ import { phateInit, phateUpdate, getPhateHistory } from 'phate'
 const ExampleComponent = () => {
     const [ count, updateCount ] = useState(phateInit('count', 0, true))
     const updateOnClick = () => {
-        updateCount(phateUpdate(count + 1))
+        updateCount(phateUpdate('count', count + 1))
     }
     useEffect(() => {
         console.log('count history', getPhateHistory('count'))

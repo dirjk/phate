@@ -1,3 +1,11 @@
+function createHistoryItem(newValue, updator) {
+    return {
+        value: newValue,
+        timeStamp: Date().now(),
+        updator: updator
+    }
+}
+
 export class PhateClass {
     key
     curValue
@@ -13,7 +21,7 @@ export class PhateClass {
         this.debugMode = !!debugMode
         this.updateCount = 1
         if (this.debugMode) {
-            this.history.push(initialValue)
+            this.history.push(createHistoryItem(initialValue, 'initialValue'))
         }
     }
     updateValue(newValue, updator) {
@@ -21,11 +29,12 @@ export class PhateClass {
         this.curValue = newValue
         this.updateCount = this.updateCount + 1
         if (this.debugMode) {
-            this.history.push({
-                value: newValue,
-                timeStamp: Date.now(),
-                updator
-            }) 
+            if (typeof updator === 'undefined') {
+                try {
+                    updator = (new Error()).stack.split('\n')[3].trim()
+                } catch {}
+            }
+            this.history.push(createHistoryItem(newValue, updator))
         }
     }
 }

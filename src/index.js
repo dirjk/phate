@@ -31,16 +31,16 @@ function phateInit(key, initialValue, debugMode) {
     return initialValue
 }
 
-function phateUpdate(key, newValue) {
+function phateUpdate(key, newValue, updator) {
     // update all the phate stuff to the new value for this key
     let phate = states[key]
     // do the updates 
-    phate.updateValue(newValue)
+    phate.updateValue(newValue, updator)
     // and then return the newValue directly so it can integrate with other state management libraries.
     return newValue
 }
 
-module.exports = { 
+export { 
     phateInit,
     phateUpdate,
     phateState,
