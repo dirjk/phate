@@ -11,6 +11,7 @@ Parameters:
 * `debugMode` - a boolean flag used to turn some features on and off.
 * `settings` - an object used to determine behavior of this particular Phate instance.
     * `persistence` - one of: `sessionStorage`, `localStorage`, or `undefined`
+    * `sharedScope` - one of: `window`, or `undefined`
 
 Return Value: this function returns `initialValue` unmodified.
 
@@ -47,6 +48,13 @@ Phate has the option to keep the state persistent across visits to your app. Per
 
 Parameters:
 * set the `persistence` key of the settings object to either `sessionStorage` or `localStorage` when initializing the state using phateInit.
+
+# Advanced Use: Shared Scope
+
+Each Phate Instance is configurable so that you can set what scope it is available on. The default setting is to have it only available to your code that has `import 'phate'` in scope, however it is also possible to set the scope to `window`. This is useful because it allows you to share Phate instances with all of your code on a single page, such as if your page is rendered using a micro-app pattern or if there are multiple types of app on your page, such as both a React app and a Vue app.
+
+Parameters:
+* set the `sharedScope` key of the settings object to either `window` or `undefined` when initializing the state using phateInit.
 
 # Advanced Use: Integrating into a React project
 
