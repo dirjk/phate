@@ -9,6 +9,8 @@ Parameters:
 * `key` - a unique string that identifies which state you are initializing.
 * `initialValue` - the value to initialize this Phate key as.
 * `debugMode` - a boolean flag used to turn some features on and off.
+* `settings` - an object used to determine behavior of this particular Phate instance.
+    * `persistence` - one of: `sessionStorage`, `localStorage`, or `undefined`
 
 Return Value: this function returns `initialValue` unmodified.
 
@@ -39,9 +41,16 @@ Parameters:
 
 Return Value: an array of objects containing all the updates made to this state since it was initialized.
 
+# Advanced Use: Persistance
+
+Phate has the option to keep the state persistent across visits to your app. Persistance is configurable to use either sessionStorage or localStorage. This is a useful way to prevent unnecessary API or graphQL fetch calls as your users navigate across multiple independent apps on your site.
+
+Parameters:
+* set the `persistence` key of the settings object to either `sessionStorage` or `localStorage` when initializing the state using phateInit.
+
 # Advanced Use: Integrating into a React project
 
-Phate is designed to be easily integrated into React functional components to help with debugging. In fact, this is the very reason that Phate was first created!
+Phate is designed to be easily integrated into React functional components to help with debugging. In fact, this is one of the very reasons that Phate was first created!
 
 ```javascript
 import React, { useState } from 'react'

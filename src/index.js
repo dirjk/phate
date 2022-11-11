@@ -19,16 +19,16 @@ function getPhateUpdateCount(key) {
     return states[key].updateCount
 }
 
-function phateInit(key, initialValue, debugMode) {
+function phateInit(key, initialValue, debugMode, settings) {
     // first we check to see if it has been initialized before. if it does, we don't do anything and return right away.
     let phate = states[key]
     if (typeof phate === 'undefined') {
         // set up the new phate instance
-        let phate = new PhateClass(key, initialValue, debugMode)
+        phate = new PhateClass(key, initialValue, debugMode, settings)
         states[key] = phate
     }
     // make sure to return the value so it can be used with other state management systems
-    return initialValue
+    return phate.initialValue
 }
 
 function phateUpdate(key, newValue, updator) {
@@ -37,7 +37,7 @@ function phateUpdate(key, newValue, updator) {
     // do the updates 
     phate.updateValue(newValue, updator)
     // and then return the newValue directly so it can integrate with other state management libraries.
-    return newValue
+    return phate.curValue
 }
 
 export { 
