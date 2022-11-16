@@ -20,9 +20,9 @@ function getPhateUpdateCount(key) {
     return getPhateInstance(key).updateCount
 }
 
-function phateInit(key, initialValue, debugMode, settings) {
+function phateInit(key, initialValue, settings) {
     // first we check to see if it has been initialized before. if it does, we don't do anything and return right away.
-    let phate = corePhateInit(key, initialValue, debugMode, settings)
+    let phate = corePhateInit(key, initialValue, settings)
     // make sure to return the value so it can be used with other state management systems
     return phate.initialValue
 }

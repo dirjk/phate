@@ -3,9 +3,9 @@ import {
     corePhateInit
 } from '../shared.js'
 
-function reactPhateInit(useState, key, initialValue, debugMode, settings) {
+function reactPhateInit(useState, key, initialValue, settings) {
     // first we do the phate stuff
-    let phate = corePhateInit(key, initialValue, debugMode, settings)
+    let phate = corePhateInit(key, initialValue, settings)
     // and we do get the react stuff here
     const [ x, updateX ] = useState(phate.initialValue)
     // next we subscribe the react update function to everthing for this key

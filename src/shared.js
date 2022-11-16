@@ -13,17 +13,17 @@ export function getPhateInstance(key) {
     return phate
 }
 
-export function corePhateInit(key, initialValue, debugMode, settings) {
+export function corePhateInit(key, initialValue, settings) {
     let phate = undefined
-    if (settings.sharedScope === 'window') {
+    if (settings?.sharedScope === 'window') {
         phate = window?.[windowScopeKey]?.[key]
     } else {
         phate = states[key]
     }
     if (typeof phate === 'undefined') {
         // set up the new phate instance
-        phate = new PhateClass(key, initialValue, debugMode, settings)
-        if (settings.sharedScope === 'window') {
+        phate = new PhateClass(key, initialValue, settings)
+        if (settings?.sharedScope === 'window') {
             scopes[key] = 'window'
             // we need to see if there is already an object on the dom.
             if (window[windowScopeKey]) {

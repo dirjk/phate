@@ -1,6 +1,6 @@
 {
     "name": "phate",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "A state management library for Javascript",
     "author": "dirjk - github.com/dirjk",
     "main": "./src",
