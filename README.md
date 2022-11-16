@@ -62,12 +62,13 @@ Phate is designed to be easily integrated into React functional components to he
 
 ```javascript
 import React, { useState } from 'react'
-import { phateInit, phateUpdate, getPhateHistory } from 'phate'
+import reactPhateInit from 'phate/react'
+import { getPhateHistory } from 'phate'
 
 const ExampleComponent = () => {
-    const [ count, updateCount ] = useState(phateInit('count', 0, true))
+    const [ count, updateCount ] = reactPhateInit(useState, 'count', 0, true)
     const updateOnClick = () => {
-        updateCount(phateUpdate('count', count + 1))
+        updateCount(count + 1)
     }
     useEffect(() => {
         console.log('count history', getPhateHistory('count'))

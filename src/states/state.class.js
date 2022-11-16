@@ -47,21 +47,24 @@ export class PhateClass {
         }
     }
     updateValue(newValue, updator) {
-        this.prevValue = this.curValue
-        this.curValue = newValue
-        this.updateCount = this.updateCount + 1
-        if (this.debugMode) {
-            if (typeof updator === 'undefined') {
-                try {
-                    updator = (new Error()).stack.split('\n')[3].trim()
-                } catch {}
+        // we do the same checks as react does so we only update when necessary:
+        if(!Object.is(newValue, this.curValue)) {
+            this.prevValue = this.curValue
+            this.curValue = newValue
+            this.updateCount = this.updateCount + 1
+            if (this.debugMode) {
+                if (typeof updator === 'undefined') {
+                    try {
+                        updator = (new Error()).stack.split('\n')[3].trim()
+                    } catch {}
+                }
+                this.history.push(createHistoryItem(newValue, updator))
             }
-            this.history.push(createHistoryItem(newValue, updator))
-        }
-        if (this.settings.persistence === 'localStorage') {
-            localStorage.setItem(getStorageKey(this.key), JSON.stringify(newValue))
-        } else if (this.settings.persistence === 'sessionStorage') {
-            sessionStorage.setItem(getStorageKey(this.key), JSON.stringify(newValue))
+            if (this.settings.persistence === 'localStorage') {
+                localStorage.setItem(getStorageKey(this.key), JSON.stringify(newValue))
+            } else if (this.settings.persistence === 'sessionStorage') {
+                sessionStorage.setItem(getStorageKey(this.key), JSON.stringify(newValue))
+            }
         }
     }
 }

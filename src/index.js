@@ -1,19 +1,12 @@
 import { PhateClass } from './states/state.class'
 
-const states = {}
-const scopes = {}
-const windowScopeKey = '(phate)'
-
-function getPhateInstance(key) {
-    // this function assumes that this phate instance has already been initialized at the correct scope.
-    let phate
-    if (scopes[key] === 'window') {
-        phate = window[windowScopeKey][key]
-    } else {
-        phate = states[key]
-    }
-    return phate
-}
+import {
+    states,
+    scopes,
+    windowScopeKey,
+    getPhateInstance,
+    corePhateInit
+} from './shared.js'
 
 function phateState(key) {
     return getPhateInstance(key).curValue
@@ -34,29 +27,7 @@ function getPhateUpdateCount(key) {
 
 function phateInit(key, initialValue, debugMode, settings) {
     // first we check to see if it has been initialized before. if it does, we don't do anything and return right away.
-    let phate = undefined
-    if (settings.sharedScope === 'window') {
-        phate = window?.[windowScopeKey]?.[key]
-    } else {
-        phate = states[key]
-    }
-    if (typeof phate === 'undefined') {
-        // set up the new phate instance
-        phate = new PhateClass(key, initialValue, debugMode, settings)
-        if (settings.sharedScope === 'window') {
-            scopes[key] = 'window'
-            // we need to see if there is already an object on the dom.
-            if (window[windowScopeKey]) {
-                window[windowScopeKey][key] = phate
-            } else {
-                const newWindowStates = {}
-                newWindowStates[key] = phate
-                window[windowScopeKey] = newWindowStates
-            }
-        } else {
-            states[key] = phate
-        }
-    }
+    let phate = corePhateInit(key, initialValue, debugMode, settings)
     // make sure to return the value so it can be used with other state management systems
     return phate.initialValue
 }
