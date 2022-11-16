@@ -8,8 +8,8 @@ First, initialize a phate instance with a unique key and a initialValue using th
 Parameters:
 * `key` - a unique string that identifies which state you are initializing.
 * `initialValue` - the value to initialize this Phate key as.
-* `debugMode` - a boolean flag used to turn some features on and off.
 * `settings` - an object used to determine behavior of this particular Phate instance.
+    * `debugMode` - a boolean flag used to turn some features on and off.
     * `persistence` - one of: `sessionStorage`, `localStorage`, or `undefined`
     * `sharedScope` - one of: `window`, or `undefined`
 
@@ -35,7 +35,7 @@ Return Value: the updated value of this state.
 
 Phate has the option to keep track of the entire history of state updates throughout your app's lifecycle. This is useful to help debug any race conditions that may occur with asynchrounous state updates, or just to see how your state has changed over time.
 
-State Histories are available through the `getPhateHistory()` function. For memory considerations, this is only available when `debugMode` is set to `true` when a phate is initialized.
+State Histories are available through the `getPhateHistory()` function. For memory considerations, this is only available when `settings.debugMode` is set to `true` when a phate is initialized.
 
 Parameters:
 * `key` - the unique key that identifies which state you would like the history of.
@@ -66,7 +66,7 @@ import reactPhateInit from 'phate/react'
 import { getPhateHistory } from 'phate'
 
 const ExampleComponent = () => {
-    const [ count, updateCount ] = reactPhateInit(useState, 'count', 0, true)
+    const [ count, updateCount ] = reactPhateInit(useState, 'count', 0, { debugMode: true})
     const updateOnClick = () => {
         updateCount(count + 1)
     }

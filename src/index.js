@@ -1,9 +1,4 @@
-import { PhateClass } from './states/state.class'
-
 import {
-    states,
-    scopes,
-    windowScopeKey,
     getPhateInstance,
     corePhateInit
 } from './shared.js'

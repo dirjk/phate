@@ -18,7 +18,7 @@ export class PhateClass {
     updateCount
     settings = {}
     debugMode = false
-    constructor(key, initialValue, debugMode, settings){
+    constructor(key, initialValue, settings){
         this.key = key
         const storageKey = getStorageKey(key)
         let tempValue = null
@@ -39,7 +39,7 @@ export class PhateClass {
         }
         this.initialValue = initialValue
         this.curValue = initialValue
-        this.debugMode = !!debugMode
+        this.debugMode = !!settings?.debugMode
         this.settings = {}
         this.updateCount = 1
         if (this.debugMode) {
