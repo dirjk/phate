@@ -16,7 +16,7 @@ function reactPhateInit(useState, key, initialValue, settings) {
         // we need to check if newX is a function because React has different behavior if it is.
         let newNewX = newX
         if (typeof newX === 'function') {
-            newNewX = newX(phate.prevValue)
+            newNewX = newX(phate.curValue)
         }
         phate.updateValue(newNewX, updator)
         updateX(newNewX)
